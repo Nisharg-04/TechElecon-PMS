@@ -21,9 +21,9 @@ const Header: React.FC = () => {
     notifications 
   } = useApp();
 
-  // const unreadNotifications = notifications.filter(n => 
-  //   !n.isRead && n.userId === currentUser?.id
-  // ).length;
+  const unreadNotifications = notifications.filter(n => 
+    !n.isRead && n.userId === currentUser?.id
+  ).length;
 
   return (
     <motion.header
@@ -76,11 +76,11 @@ const Header: React.FC = () => {
             className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             <Bell className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-            {/* {unreadNotifications > 0 && (
+            {unreadNotifications > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
                 {unreadNotifications > 9 ? '9+' : unreadNotifications}
               </span>
-            )} */}
+            )}
           </Link>
 
           {/* Settings */}

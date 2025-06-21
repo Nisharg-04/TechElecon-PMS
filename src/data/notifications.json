@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "userId": "2",
+    "title": "New Task Assigned",
+    "message": "You have been assigned to 'Implement user registration API'",
+    "type": "info",
+    "isRead": false,
+    "createdAt": "2025-01-05T09:00:00Z",
+    "actionUrl": "/tasks/2"
+  },
+  {
+    "id": "2",
+    "userId": "3",
+    "title": "Task Deadline Approaching",
+    "message": "Task 'Create product catalog frontend' is due in 2 days",
+    "type": "warning",
+    "isRead": false,
+    "createdAt": "2025-01-13T10:00:00Z",
+    "actionUrl": "/tasks/3"
+  },
+  {
+    "id": "3",
+    "userId": "4",
+    "title": "Task Approved",
+    "message": "Your task 'Design user authentication system' has been approved",
+    "type": "success",
+    "isRead": true,
+    "createdAt": "2025-01-09T09:15:00Z",
+    "actionUrl": "/tasks/1"
+  },
+  {
+    "id": "4",
+    "userId": "1",
+    "title": "Project Update",
+    "message": "E-Commerce Platform project is 65% complete",
+    "type": "info",
+    "isRead": true,
+    "createdAt": "2025-01-15T14:30:00Z",
+    "actionUrl": "/projects/1"
+  }
+]

@@ -4,19 +4,21 @@ import {
   Users, 
   FolderOpen, 
   CheckSquare, 
-
+  Clock,
   TrendingUp,
+  Calendar,
+  Bell,
+  Activity
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import Card from '../components/Common/Card';
 import Badge from '../components/Common/Badge';
 
 const Dashboard: React.FC = () => {
-  const { currentUser, users, projects, tasks } = useApp();
+  const { currentUser, users, projects, tasks, notifications } = useApp();
 
   const isAdmin = currentUser?.role === 'admin';
 
-  console.log(tasks)
   // Calculate stats
   const stats = {
     totalUsers: users.length,
@@ -28,7 +30,7 @@ const Dashboard: React.FC = () => {
     pendingTasks: isAdmin
       ? tasks.filter(t => t.status !== 'done').length
       : tasks.filter(t => t.assignedTo === currentUser?.id && t.status !== 'done').length,
-    // unreadNotifications: notifications.filter(n => !n.isRead && n.userId === currentUser?.id).length
+    unreadNotifications: notifications.filter(n => !n.isRead && n.userId === currentUser?.id).length
   };
 
   const recentTasks = isAdmin 

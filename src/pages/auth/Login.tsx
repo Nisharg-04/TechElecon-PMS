@@ -58,7 +58,7 @@ const Login: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4"
           >
-            <span className="text-white font-bold text-xl">TEPL</span>
+            <span className="text-white font-bold text-xl">TE</span>
           </motion.div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Welcome Back
@@ -104,7 +104,7 @@ const Login: React.FC = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-      
+            {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email Address
@@ -123,7 +123,7 @@ const Login: React.FC = () => {
               </div>
             </div>
 
-     
+            {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Password
@@ -149,7 +149,7 @@ const Login: React.FC = () => {
               </div>
             </div>
 
-            
+            {/* Login Button */}
             <Button
               type="submit"
               loading={loading}
@@ -161,7 +161,7 @@ const Login: React.FC = () => {
             </Button>
           </form>
 
-     
+          {/* Quick Login Demo Buttons */}
           <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
               Quick Demo Login:
@@ -186,6 +186,7 @@ const Login: React.FC = () => {
             </div>
           </div>
 
+          {/* Register Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Don't have an account?{' '}

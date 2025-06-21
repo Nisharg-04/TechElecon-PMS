@@ -35,6 +35,7 @@ export interface Task {
   priority: 'low' | 'medium' | 'high' | 'critical';
   assignedTo: string;
   projectId: string;
+  sprintId?: string;
   createdBy: string;
   createdAt: string;
   updatedAt: string;
@@ -59,7 +60,7 @@ export interface ActivityLog {
   userId: string;
   action: string;
   description: string;
-  entityType: 'project' | 'task' | 'user' | 'system';
+  entityType: 'project' | 'task' | 'user' | 'system' | 'sprint';
   entityId?: string;
   timestamp: string;
 }
@@ -83,6 +84,23 @@ export interface Attendance {
   clockOut?: string;
   totalHours?: number;
   status: 'present' | 'absent' | 'late' | 'half-day';
+}
+
+export interface Sprint {
+  id: string;
+  name: string;
+  description: string;
+  projectId: string;
+  status: 'planning' | 'active' | 'completed' | 'cancelled';
+  startDate: string;
+  endDate: string;
+  goal: string;
+  taskIds: string[];
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  startedAt?: string;
+  completedAt?: string;
 }
 
 export interface Performance {

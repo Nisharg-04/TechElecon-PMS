@@ -16,7 +16,8 @@ import {
   Activity,
   FileText,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Zap
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -33,11 +34,22 @@ const Sidebar: React.FC = () => {
     { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/users', icon: Users, label: 'User Management' },
     { path: '/projects', icon: FolderOpen, label: 'Projects' },
-    
+    { path: '/tasks', icon: CheckSquare, label: 'Tasks' },
+    { path: '/sprints', icon: Zap, label: 'Sprint Management' },
+    { path: '/performance', icon: BarChart3, label: 'Performance' },
+    { path: '/attendance-logs', icon: Clock, label: 'Attendance' },
+    { path: '/reports', icon: FileText, label: 'Reports' },
+    { path: '/activity-logs', icon: Activity, label: 'Activity Logs' },
   ];
 
   const employeeRoutes = [
-
+    { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/my-projects', icon: FolderOpen, label: 'My Projects' },
+    { path: '/my-tasks', icon: CheckSquare, label: 'My Tasks' },
+    { path: '/kanban', icon: Calendar, label: 'Kanban Board' },
+    { path: '/attendance', icon: Clock, label: 'Attendance' },
+    { path: '/my-performance', icon: BarChart3, label: 'Performance' },
+    { path: '/my-activity', icon: Activity, label: 'Activity' },
   ];
 
   const commonRoutes = [
@@ -54,7 +66,7 @@ const Sidebar: React.FC = () => {
       animate={{ x: 0 }}
       className={`fixed left-0 top-0 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 z-40 transition-all duration-300 ${
         sidebarOpen ? 'w-64' : 'w-20'
-      }`}
+      } overflow-y-auto scrollbar-thin scrollbar-thumb-transparent scrollbar-track-transparent`}
     >
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 min-h-16 max-h-16">
@@ -145,6 +157,18 @@ const Sidebar: React.FC = () => {
           {sidebarOpen && <span className="font-medium">Logout</span>}
         </button>
       </div>
+
+      {/* Custom Scrollbar Hiding */}
+      <style jsx global>{`
+        .scrollbar-thin::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+        .scrollbar-thin {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+      `}</style>
     </motion.div>
   );
 };

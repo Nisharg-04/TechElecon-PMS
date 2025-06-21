@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FolderOpen, Plus, Edit3, Trash2, Search, Filter, Users, Calendar } from 'lucide-react';
+import { FolderOpen, Plus, Edit3, Trash2, Search, Filter, Users, Calendar, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import Card from '../../components/Common/Card';
 import Button from '../../components/Common/Button';
 import Badge from '../../components/Common/Badge';
 import Modal from '../../components/Common/Modal';
-import { Project } from '../../types';
 
 const ProjectList: React.FC = () => {
-  const { projects, users, addProject, updateProject, deleteProject, currentUser } = useApp();
+  const { projects, users, addProject, updateProject, deleteProject } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'completed' | 'on-hold'>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [editingProject, setEditingProject] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -22,7 +21,7 @@ const ProjectList: React.FC = () => {
     endDate: '',
     deadline: '',
     priority: 'medium' as 'low' | 'medium' | 'high' | 'critical',
-    teamMembers: [] as string[],
+    teamMembers: [] as string[]
   });
 
   const filteredProjects = projects.filter(project => {
@@ -35,16 +34,12 @@ const ProjectList: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingProject) {
-      updateProject(editingProject.id, {
-        ...formData,
-      });
+      updateProject(editingProject.id, formData);
     } else {
       addProject({
         ...formData,
         progress: 0,
-        createdBy: currentUser?.id || '1',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        createdBy: '1' // Current admin user
       });
     }
     resetForm();
@@ -65,7 +60,7 @@ const ProjectList: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleEdit = (project: Project) => {
+  const handleEdit = (project: any) => {
     setEditingProject(project);
     setFormData({
       name: project.name,
@@ -75,7 +70,7 @@ const ProjectList: React.FC = () => {
       endDate: project.endDate,
       deadline: project.deadline,
       priority: project.priority,
-      teamMembers: Array.isArray(project.teamMembers) ? project.teamMembers : [],
+      teamMembers: project.teamMembers
     });
     setIsModalOpen(true);
   };
@@ -84,6 +79,22 @@ const ProjectList: React.FC = () => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       deleteProject(projectId);
     }
+  };
+
+  const addTeamMember = (userId: string) => {
+    if (!formData.teamMembers.includes(userId)) {
+      setFormData({
+        ...formData,
+        teamMembers: [...formData.teamMembers, userId]
+      });
+    }
+  };
+
+  const removeTeamMember = (userId: string) => {
+    setFormData({
+      ...formData,
+      teamMembers: formData.teamMembers.filter(id => id !== userId)
+    });
   };
 
   const getStatusColor = (status: string) => {
@@ -104,6 +115,15 @@ const ProjectList: React.FC = () => {
       default: return 'secondary';
     }
   };
+
+  const getUserName = (userId: string) => {
+    const user = users.find(u => u.id === userId);
+    return user ? user.name : 'Unknown';
+  };
+
+  const availableUsers = users.filter(user => 
+    user.role === 'employee' && !formData.teamMembers.includes(user.id)
+  );
 
   return (
     <div className="space-y-6">
@@ -151,7 +171,7 @@ const ProjectList: React.FC = () => {
               <Filter className="w-4 h-4 text-gray-400" />
               <select
                 value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value as 'all' | 'active' | 'completed' | 'on-hold')}
+                onChange={(e) => setFilterStatus(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="all">All Status</option>
@@ -232,7 +252,7 @@ const ProjectList: React.FC = () => {
         ))}
       </div>
 
-   
+      {/* Add/Edit Project Modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={resetForm}
@@ -273,7 +293,7 @@ const ProjectList: React.FC = () => {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'completed' | 'on-hold' | 'cancelled' })}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="active">Active</option>
@@ -289,7 +309,7 @@ const ProjectList: React.FC = () => {
               </label>
               <select
                 value={formData.priority}
-                onChange={(e) => setFormData({ ...formData, priority: e.target.value as 'low' | 'medium' | 'high' | 'critical' })}
+                onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="low">Low</option>
@@ -341,35 +361,51 @@ const ProjectList: React.FC = () => {
             </div>
           </div>
 
+          {/* Team Members Section */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Team Members
             </label>
-            <div className="max-h-40 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-lg p-2 bg-white dark:bg-gray-700">
-              {users.map((user) => (
-                <label key={user.id} className="flex items-center space-x-2 py-1 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.teamMembers.includes(user.id)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setFormData({
-                          ...formData,
-                          teamMembers: [...formData.teamMembers, user.id],
-                        });
-                      } else {
-                        setFormData({
-                          ...formData,
-                          teamMembers: formData.teamMembers.filter((id) => id !== user.id),
-                        });
-                      }
-                    }}
-                    className="form-checkbox h-4 w-4 text-blue-600 transition duration-150"
-                  />
-                  <span className="text-gray-900 dark:text-white text-sm">{user.name} ({user.role})</span>
-                </label>
-              ))}
-            </div>
+            
+            {/* Selected Members */}
+            {formData.teamMembers.length > 0 && (
+              <div className="mb-3">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Selected Members:</p>
+                <div className="flex flex-wrap gap-2">
+                  {formData.teamMembers.map(userId => (
+                    <div key={userId} className="flex items-center bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
+                      <span>{getUserName(userId)}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeTeamMember(userId)}
+                        className="ml-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Available Members */}
+            {availableUsers.length > 0 && (
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Available Members:</p>
+                <div className="max-h-32 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-lg p-2">
+                  {availableUsers.map(user => (
+                    <button
+                      key={user.id}
+                      type="button"
+                      onClick={() => addTeamMember(user.id)}
+                      className="w-full text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-sm text-gray-900 dark:text-white"
+                    >
+                      {user.name} - {user.department}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex space-x-4 pt-4">

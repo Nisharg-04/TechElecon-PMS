@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "taskId": "1",
+    "userId": "4",
+    "content": "I've completed the initial wireframes. Ready for review.",
+    "createdAt": "2025-01-08T14:30:00Z"
+  },
+  {
+    "id": "2",
+    "taskId": "1",
+    "userId": "1",
+    "content": "Great work! The designs look clean and user-friendly. Approved.",
+    "createdAt": "2025-01-09T09:15:00Z"
+  },
+  {
+    "id": "3",
+    "taskId": "2",
+    "userId": "2",
+    "content": "Working on the validation logic. Should be done by tomorrow.",
+    "createdAt": "2025-01-14T16:45:00Z"
+  },
+  {
+    "id": "4",
+    "taskId": "4",
+    "userId": "5",
+    "content": "Testing framework is configured. Need final review before merging.",
+    "createdAt": "2025-01-15T12:30:00Z"
+  }
+]

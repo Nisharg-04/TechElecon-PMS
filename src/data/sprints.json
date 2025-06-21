@@ -1,0 +1,54 @@
+[
+    {
+        "id": "1",
+        "name": "Sprint 1 - Authentication & User Management",
+        "description": "Implement user authentication system and basic user management features",
+        "projectId": "1",
+        "status": "completed",
+        "startDate": "2025-01-01",
+        "endDate": "2025-01-14",
+        "goal": "Complete user authentication and basic user management functionality",
+        "taskIds": [
+            "1",
+            "2"
+        ],
+        "createdBy": "1",
+        "createdAt": "2023-12-28T10:00:00Z",
+        "updatedAt": "2025-01-14T18:00:00Z",
+        "startedAt": "2025-01-01T09:00:00Z",
+        "completedAt": "2025-01-14T18:00:00Z"
+    },
+    {
+        "id": "2",
+        "name": "Sprint 2 - Product Catalog",
+        "description": "Build product catalog with search and filtering capabilities",
+        "projectId": "1",
+        "status": "active",
+        "startDate": "2025-01-15",
+        "endDate": "2025-01-28",
+        "goal": "Implement complete product catalog functionality",
+        "taskIds": [
+            "3"
+        ],
+        "createdBy": "1",
+        "createdAt": "2025-01-10T10:00:00Z",
+        "updatedAt": "2025-01-15T09:00:00Z",
+        "startedAt": "2025-01-15T09:00:00Z"
+    },
+    {
+        "id": "3",
+        "name": "Sprint 3 - Testing & QA",
+        "description": "Setup comprehensive testing framework and quality assurance processes",
+        "projectId": "1",
+        "status": "planning",
+        "startDate": "2025-01-29",
+        "endDate": "2025-02-11",
+        "goal": "Establish robust testing and QA processes",
+        "taskIds": [
+            "4"
+        ],
+        "createdBy": "1",
+        "createdAt": "2025-01-12T10:00:00Z",
+        "updatedAt": "2025-01-12T10:00:00Z"
+    }
+]

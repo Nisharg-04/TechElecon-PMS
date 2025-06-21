@@ -31,7 +31,7 @@ const Register: React.FC = () => {
 
     setLoading(true);
 
- 
+    // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     addUser({
@@ -62,7 +62,7 @@ const Register: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-    
+        {/* Logo and Title */}
         <div className="text-center mb-8">
           <motion.div
             initial={{ scale: 0 }}
@@ -80,7 +80,7 @@ const Register: React.FC = () => {
           </p>
         </div>
 
-      
+        {/* Register Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ const Register: React.FC = () => {
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
-       
+            {/* Name Field */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Full Name
@@ -108,7 +108,7 @@ const Register: React.FC = () => {
               </div>
             </div>
 
-           
+            {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email Address
@@ -128,7 +128,7 @@ const Register: React.FC = () => {
               </div>
             </div>
 
-      
+            {/* Role Selection */}
             <div>
               <label htmlFor="role" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Role
@@ -145,6 +145,7 @@ const Register: React.FC = () => {
               </select>
             </div>
 
+            {/* Department and Position */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="department" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -176,7 +177,7 @@ const Register: React.FC = () => {
               </div>
             </div>
 
-
+            {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Password
@@ -203,7 +204,7 @@ const Register: React.FC = () => {
               </div>
             </div>
 
-   
+            {/* Confirm Password Field */}
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Confirm Password
@@ -230,7 +231,7 @@ const Register: React.FC = () => {
               </div>
             </div>
 
-          
+            {/* Register Button */}
             <Button
               type="submit"
               loading={loading}
@@ -242,7 +243,7 @@ const Register: React.FC = () => {
             </Button>
           </form>
 
-      
+          {/* Login Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Already have an account?{' '}
