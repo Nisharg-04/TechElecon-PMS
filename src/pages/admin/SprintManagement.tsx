@@ -38,7 +38,7 @@ const SprintManagement: React.FC = () => {
       addSprint({
         ...formData,
         status: 'planning',
-        createdBy: '1' // Current admin user
+        createdBy: '1' 
       });
     }
     resetForm();

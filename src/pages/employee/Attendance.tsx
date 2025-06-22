@@ -5,6 +5,9 @@ import { useApp } from '../../context/AppContext';
 import Card from '../../components/Common/Card';
 import Button from '../../components/Common/Button';
 import Badge from '../../components/Common/Badge';
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend
+} from 'recharts';
 
 const Attendance: React.FC = () => {
   const { currentUser, attendance, clockIn, clockOut } = useApp();
@@ -70,6 +73,22 @@ const Attendance: React.FC = () => {
       second: '2-digit'
     });
   };
+
+
+  const barData = monthlyAttendance.map(record => ({
+    date: new Date(record.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    hours: record.totalHours || 0
+  }));
+
+  const statusCounts: Record<string, number> = {};
+  monthlyAttendance.forEach(r => {
+    statusCounts[r.status] = (statusCounts[r.status] || 0) + 1;
+  });
+  const pieData = Object.entries(statusCounts).map(([status, value]) => ({
+    name: status.charAt(0).toUpperCase() + status.slice(1),
+    value
+  }));
+  const pieColors = ['#22c55e', '#facc15', '#ef4444', '#38bdf8', '#a3a3a3'];
 
   return (
     <div className="space-y-6">
@@ -222,6 +241,45 @@ const Attendance: React.FC = () => {
             </div>
           </Card>
         </motion.div>
+      </div>
+
+      {/* Attendance Charts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Bar Chart: Hours per Day */}
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Hours Worked per Day</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={barData}>
+              <XAxis dataKey="date" stroke="#888" />
+              <YAxis stroke="#888" />
+              <Tooltip />
+              <Bar dataKey="hours" fill="#6366f1" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </Card>
+        {/* Pie Chart: Status Distribution */}
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Attendance Status Distribution</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie
+                data={pieData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={80}
+                label
+              >
+                {pieData.map((entry, idx) => (
+                  <Cell key={`cell-${idx}`} fill={pieColors[idx % pieColors.length]} />
+                ))}
+              </Pie>
+              <Legend />
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </Card>
       </div>
 
       {/* Recent Attendance */}

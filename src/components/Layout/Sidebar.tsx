@@ -75,7 +75,7 @@ const Sidebar: React.FC = () => {
             <div className="w-10 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">TEPL</span>
             </div>
-            <span className="font-bold text-gray-900 dark:text-white">Tech Elecon PVT LTD</span>
+            <span className="font-bold text-gray-900 dark:text-white">Tech Elecon PVT. LTD.</span>
           </div>
         )}
         <button

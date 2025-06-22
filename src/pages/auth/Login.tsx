@@ -58,7 +58,7 @@ const Login: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4"
           >
-            <span className="text-white font-bold text-xl">TE</span>
+            <span className="text-white font-bold text-xl">TEPL</span>
           </motion.div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Welcome Back

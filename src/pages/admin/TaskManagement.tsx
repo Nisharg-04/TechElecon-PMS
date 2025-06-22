@@ -43,7 +43,7 @@ const TaskManagement: React.FC = () => {
     } else {
       addTask({
         ...taskData,
-        createdBy: '1' // Current admin user
+        createdBy: '1' 
       });
     }
     resetForm();
