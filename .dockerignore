@@ -1,0 +1,30 @@
+node_modules
+/node_modules
+dist
+dist/
+.DS_Store
+.env
+.env.*
+!/public/.git
+/public/build
+/public/prerender
+.history
+.idea
+.vscode
+*.log
+
+# testing
+/coverage
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# IDE/editor
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
